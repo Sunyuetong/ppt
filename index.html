@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>幻灯片</title>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<br><br><br><br>
+<div class="wrap960">
+	<div class="shareLayout">
+		<div class="shareList" id="shareList">
+			<a href="http://sc.chinaz.com/" title="搜索引擎Lucene" target="_blank" style="disp"><img src="images/lucene.png" alt="搜索引擎Lucene"/></a><a href="http://sc.chinaz.com/" title="探秘JavaScript框架" target="_blank"><img src="images/js.png" alt="探秘JavaScript9框架"/></a><a href="http://sc.chinaz.com/" title="CSS跨浏览器" target="_blank"><img src="images/css.png" alt="CSS跨浏览器"/></a>
+		</div>
+		<div class="pageLayout" id="pageLayout">
+			<a index="0" class="active" onclick="show(this)"><span><em style="width: 25px; float: right;"></em></span></a><a index="1" onclick="show(this)"><span><em style="width: 0px; float: right;"></em></span></a><a index="2" onclick="show(this)"><span><em style="width: 0px; float: left;"></em></span></a></div>
+		</div>
+	<a onclick="move(false)"class="backBtn" id="backBtn"></a>
+	<a onclick="move(true)"class="nextBtn" id="nextBtn"></a>
+</div>
+<script>
+	var share=document.getElementById('shareList').getElementsByTagName('a');
+	var page=document.getElementById('pageLayout').getElementsByTagName('a');
+	var back=document.getElementById('backBtn');
+	var next=document.getElementById('nextBtn');
+	function getcurindex () {
+		for(var i=0;i<page.length;i++){
+			if(page[i].className.indexOf('active')!=-1){
+				return i;
+			}
+		}
+	}
+	function show(pag){
+		var index;
+		for(var i=0;i<page.length;i++){
+			if(page[i]==pag){
+				index=i;
+				break;
+			}
+		}
+		for(var i=0;i<page.length;i++){
+			share[i].style.display="none";
+			page[i].style.background="#94c8e0";
+			page[i].className="";
+		}
+		share[index].style.display="";
+		page[index].style.background="#51ba91";
+		page[index].className="active";
+	}
+	function move(flag){
+		var index=getcurindex();
+		if(flag){
+			if(index==2){
+				index=0;
+			}
+			else{
+				index++;
+			}
+		}
+		else{
+			if(index==0){
+				index=2;
+			}
+			else{
+				index--;
+			}
+		}
+		show(page[index]);
+	}
+</script>
+</body>
+</html>
